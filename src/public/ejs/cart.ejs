@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="#">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<body>
+    <% if(user){%>
+    <h1>My cart</h1>
+    <a href="/products"><button>Search products to add</button></a>
+    <br>
+    <br>
+    <% if(products.length > 0){ %> 
+    <form id="formId" action="/clearCart" method="post">
+        <input type="submit" value="Clear Cart"></input>
+    </form>
+    <% } %> 
+    <div>
+        <% products.forEach(product=>{%>
+            <h2><%= product.title %> </h2>
+            <img src="<%= product.thumbnail %>" width="100" height="100">
+            <p>Amount: <%= product.quantity %></p>
+            <p>Price: <%= product.price %></p>
+            <form id="formId" action="/deleteProducts/<%=product.id%>" method="post">
+                <input type="submit" value="Delete <%= product.title %> from cart"></input>
+            </form>
+            <br>
+            <br>
+        <%}) %> 
+        <% if(products.length > 0){ %> 
+        <div>
+            <h3>Total price: <%= finalPrice %> </h3>
+            <form id="formId" action="/buyCart" method="post">
+                <input type="submit" value="Buy now"></input>
+            </form>
+        </div>
+        <% } %> 
+    </div>
+    <%}else{%> 
+        <h1>You must be logged in to see a cart!</h1>
+        <p><a href="/login">Log in</a> or <a href="/register">register</a></p>
+    <%} %> 
+</body>
+</html>

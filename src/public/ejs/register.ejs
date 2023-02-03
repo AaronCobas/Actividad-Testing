@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="#">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <form action="/register" method="post" enctype="multipart/form-data">
+        <ul>
+            <li>
+        <label for="">Name</label>
+        <input type="text" name="name">
+    </li>
+    <li>
+        <label for="">Adress</label>
+        <input type="text" name="adress">
+        </li>
+        <li>
+        <label for="">Age</label>
+        <input type="number" name="age">
+        </li>
+        <li>
+        <label for="">Phone number</label>
+        <input type="number" name="phone_number">
+    </li>
+    <li>
+        <label for="">Profile picture</label>
+        <input type="file" name="image">
+    </li>
+    <li>
+        <label for="">Email</label>
+        <input type="text" name="email">
+    </li>
+    <li>
+        <label for="">Password</label>
+        <input type="password" name="password">
+    </li>
+    <li>
+        <button type="submit">Register</button>
+    </li>
+    </ul>
+    </form>
+    <p>Already registered? <a href="/login">Log in</a></p>
+</body>
+</html>
