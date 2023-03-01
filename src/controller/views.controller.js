@@ -36,6 +36,19 @@ const products = async(req,res)=>{
     res.render("products",{user:userInfo,products:products})
 }
 
+const productDetails = async(req,res)=>{
+    let userInfo;
+    if(req.session.user){
+            userInfo = UserDTO.getPresenterFrom(req.session.user)
+        }else{
+            userInfo = undefined
+        } 
+    const productId = req.params.pid
+    const product = await productService.getBy({id:productId})
+    if(!product) return res.status(400).send({status:"error",error:"Product not found"})
+res.render("productDetails",{user:userInfo,product:product})
+}
+
 const logout = async(req,res)=>{
     req.session.destroy(err=>{
         if(!err) res.redirect("/login")
@@ -78,6 +91,7 @@ export default{
     index,
     notExists,
     products,
+    productDetails,
     logout,
     cart
 }

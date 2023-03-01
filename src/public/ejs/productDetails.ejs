@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=product.title%> Details</title>
+</head>
+<body>
+    <div>
+    <h1><%=product.title%></h1>
+    <img src="<%=product.thumbnail%>" alt="" width="200" height="200" srcset="">
+    <p><%=product.description%></p>
+    <p>Stock: <%=product.stock%></p>
+</div>
+<% if (user) { %>
+<label for="">Quantity</label>
+    <input type="number" id="quantity" min="1" max="<%=product.stock%>" value="1" onkeyup="imposeMinMax(this)">
+    <button onclick="addProduct('<%=product.id%>')">Add to Cart</button>
+    <% }else{ %>
+        <button disabled="disabled">Log in to add to cart</button>
+        <% } %> 
+    <br>
+    <br>
+    <a href="/products"><button>Go back to products list</button></a></li>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../js/productDetails.js"></script>
+</body>
+</html>

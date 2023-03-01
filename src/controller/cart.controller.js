@@ -1,19 +1,20 @@
 import { userService, productService, receiptService } from "../services/services.js"
 import MailingService from "../services/MailingService.js"
-import { json } from "express"
 const mailer = new MailingService()
 
 
 const addToCart = async(req,res)=>{
-    const pid = JSON.parse(req.params.id)
+    const pid = req.params.id
+    const {quantity} = req.body
+    const parsedPid = parseInt(pid)
+    const parsedQuantity = parseInt(quantity)
     const userInfo = req.session.user.email;
-    const exists = await userService.getBy({$and:[{email:userInfo},{cart:{$elemMatch:{productId:pid}}}]}).count()
+    const exists = await userService.getBy({$and:[{email:userInfo},{cart:{$elemMatch:{productId:parsedPid}}}]}).count()
     if (exists === 0){
-        await userService.update({email:userInfo},{$push:{cart:{productId:pid,quantity:1}}})
+    await userService.update({email:userInfo},{$push:{cart:{productId:parsedPid,quantity:parsedQuantity}}})
     }else{
-        await userService.update({email:userInfo, "cart.productId":pid},{$inc:{"cart.$.quantity":1}})
+    await userService.update({email:userInfo, "cart.productId":parsedPid},{$inc:{"cart.$.quantity":parsedQuantity}})
     }
-    res.redirect("/products")
 }
 
 const deleteProductFromCart = async(req,res)=>{

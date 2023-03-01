@@ -22,7 +22,7 @@ export default class Dao {
 
     get = (options,entity) =>{
         if(!this.models[entity]) throw new Error(`Entity ${entity} not defined in models`);
-        return this.models[entity].find(options)
+        return this.models[entity].find(options).lean()
     }
 
     getBy = (options,entity) =>{
