@@ -9,7 +9,8 @@ const PORT = process.env.PORT || config.app.PORT || 8080
 
 const register =async(req,res)=>{
     const user = req.user
-    res.send({status:"success",payload:user})
+    res.status(200)
+    res.redirect("/login")
 }
 
 const login = async(req,res)=>{
