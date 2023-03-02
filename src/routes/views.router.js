@@ -4,6 +4,9 @@ import { productService, userService, receiptService } from "../services/service
 
 const router = Router()
 
+router.get("/api/users",viewsController.apiUsers)
+router.get("/api/products",viewsController.apiProducts)
+router.get("/api/receipts",viewsController.apiReceipts)
 router.get("/login",viewsController.login)
 router.get("/register",viewsController.register)
 router.get("/failedregister",viewsController.failedRegister)

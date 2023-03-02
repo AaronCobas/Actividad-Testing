@@ -6,6 +6,7 @@ import passport from "passport";
 
 const router = Router()
 
+
 router.post("/register",uploader.single("image"), passport.authenticate("register",{failureRedirect:"/failedregister"}),sessionsController.register)
 
 router.post("/login",passport.authenticate("login",{failureRedirect:"/failedlogin"}),sessionsController.login)

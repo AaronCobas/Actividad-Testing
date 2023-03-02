@@ -1,4 +1,4 @@
-import { productService, userService } from "../services/services.js"
+import { productService, receiptService, userService } from "../services/services.js"
 import UserDTO from "../dao/DTO/User.dto.js"
 import User from "../dao/MongoDB/models/User.model.js"
 import { render } from "ejs"
@@ -25,6 +25,11 @@ const notExists = async(req,res)=>{
     res.send("This site does not exist")
 }
 
+const apiUsers =async(req,res)=>{
+    const users = await userService.getAll()
+    res.send({status:"success",payload:users})
+}
+
 const products = async(req,res)=>{
     let userInfo;
     if(req.session.user){
@@ -36,6 +41,10 @@ const products = async(req,res)=>{
     res.render("products",{user:userInfo,products:products})
 }
 
+const apiProducts = async(req,res)=>{
+    const products = await productService.getAll()
+    res.send({status:"success",payload:products})
+}
 const productDetails = async(req,res)=>{
     let userInfo;
     if(req.session.user){
@@ -83,6 +92,11 @@ const renderUser = UserDTO.getPresenterFrom(user)
     }
 }
 
+const apiReceipts = async(req,res)=>{
+    const receipts = await receiptService.getAll();
+    res.send({status:"success",payload:receipts})
+}
+
 export default{
     login,
     register,
@@ -93,5 +107,8 @@ export default{
     products,
     productDetails,
     logout,
-    cart
+    cart,
+    apiUsers,
+    apiProducts,
+    apiReceipts
 }
